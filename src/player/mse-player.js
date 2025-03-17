@@ -34,6 +34,7 @@ class MSEPlayer {
         this.TAG = 'MSEPlayer';
         this._type = 'MSEPlayer';
         this._emitter = new EventEmitter();
+        this._emitter.setMaxListeners(50)
 
         this._config = createDefaultConfig();
         if (typeof config === 'object') {

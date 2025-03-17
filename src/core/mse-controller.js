@@ -31,6 +31,7 @@ class MSEController {
 
         this._config = config;
         this._emitter = new EventEmitter();
+        this._emitter.setMaxListeners(50)
 
         if (this._config.isLive && this._config.autoCleanupSourceBuffer == undefined) {
             // For live stream, do auto cleanup by default
@@ -333,9 +334,11 @@ class MSEController {
             let sb = this._sourceBuffers[type];
             if (sb) {
                 let buffered = sb.buffered;
-                if (buffered.length >= 1) {
-                    if (currentTime - buffered.start(0) >= this._config.autoCleanupMaxBackwardDuration) {
-                        return true;
+                if (buffered && Array.isArray(buffered)) {
+                    if (buffered.length >= 1) {
+                        if (currentTime - buffered.start(0) >= this._config.autoCleanupMaxBackwardDuration) {
+                            return true;
+                        }
                     }
                 }
             }

@@ -28,6 +28,7 @@ class NativePlayer {
         this.TAG = 'NativePlayer';
         this._type = 'NativePlayer';
         this._emitter = new EventEmitter();
+        this._emitter.setMaxListeners(50)
 
         this._config = createDefaultConfig();
         if (typeof config === 'object') {

@@ -136,6 +136,6 @@ Log.ENABLE_VERBOSE = false;
 Log.ENABLE_CALLBACK = false;
 
 Log.emitter = new EventEmitter();
-Log.emitter.setMaxListeners(20);
+Log.emitter.setMaxListeners(50);
 
 export default Log;
