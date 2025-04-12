@@ -224,6 +224,10 @@ class MSEController {
     }
 
     appendMediaSegment(mediaSegment) {
+        //判断mediasource是否有效
+        if (!this._mediaSource || this._mediaSource.readyState !== 'open') {
+            return
+        }
         let ms = mediaSegment;
         this._pendingSegments[ms.type].push(ms);
 
@@ -326,6 +330,11 @@ class MSEController {
     _needCleanupSourceBuffer() {
         if (!this._config.autoCleanupSourceBuffer) {
             return false;
+        }
+
+        //判断mediasource是否有效
+        if (!this._mediaSource || this._mediaSource.readyState !== 'open') {
+            return false
         }
 
         let currentTime = this._mediaElement.currentTime;
